@@ -34,7 +34,13 @@ export function getContactTools(client: HoldedClient) {
         if (args.phone) queryParams.phone = args.phone;
         if (args.mobile) queryParams.mobile = args.mobile;
         if (args.customId) queryParams['customId[]'] = args.customId.join(',');
-        return client.get('/contacts', queryParams);
+        const contacts = await client.get('/contacts', queryParams) as Array<Record<string, unknown>>;
+        return contacts.map((contact) => ({
+          id: contact.id,
+          customId: contact.customId,
+          name: contact.name,
+          email: contact.email,
+        }));
       },
     },
 
