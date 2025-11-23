@@ -4,7 +4,7 @@ export function getPaymentTools(client: HoldedClient) {
   return {
     // List Payments
     list_payments: {
-      description: 'List all payments with optional pagination',
+      description: 'List all payments with optional filters for date range',
       inputSchema: {
         type: 'object' as const,
         properties: {
@@ -12,12 +12,22 @@ export function getPaymentTools(client: HoldedClient) {
             type: 'number',
             description: 'Page number for pagination (optional)',
           },
+          starttmp: {
+            type: 'string',
+            description: 'Starting timestamp (Unix timestamp) for filtering payments by date',
+          },
+          endtmp: {
+            type: 'string',
+            description: 'Ending timestamp (Unix timestamp) for filtering payments by date',
+          },
         },
         required: [],
       },
-      handler: async (args: { page?: number }) => {
+      handler: async (args: { page?: number; starttmp?: string; endtmp?: string }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
+        if (args.starttmp) queryParams.starttmp = args.starttmp;
+        if (args.endtmp) queryParams.endtmp = args.endtmp;
         return client.get('/payments', queryParams);
       },
     },

@@ -18,7 +18,7 @@ export function getDocumentTools(client: HoldedClient) {
   return {
     // List Documents
     list_documents: {
-      description: 'List all documents of a specific type with optional pagination',
+      description: 'List all documents of a specific type with optional filters for date range, contact, payment status, and sorting',
       inputSchema: {
         type: 'object' as const,
         properties: {
@@ -31,12 +31,45 @@ export function getDocumentTools(client: HoldedClient) {
             type: 'number',
             description: 'Page number for pagination (optional)',
           },
+          starttmp: {
+            type: 'string',
+            description: 'Starting timestamp (Unix timestamp) for filtering documents by date',
+          },
+          endtmp: {
+            type: 'string',
+            description: 'Ending timestamp (Unix timestamp) for filtering documents by date',
+          },
+          contactid: {
+            type: 'string',
+            description: 'Filter documents by contact ID',
+          },
+          paid: {
+            type: 'string',
+            enum: ['0', '1', '2'],
+            description: 'Filter by payment status: 0=not paid, 1=paid, 2=partially paid',
+          },
+          billed: {
+            type: 'string',
+            enum: ['0', '1'],
+            description: 'Filter by billed status: 0=not billed, 1=billed',
+          },
+          sort: {
+            type: 'string',
+            enum: ['created-asc', 'created-desc'],
+            description: 'Sort order by creation date',
+          },
         },
         required: ['docType'],
       },
-      handler: async (args: { docType: DocumentType; page?: number }) => {
+      handler: async (args: { docType: DocumentType; page?: number; starttmp?: string; endtmp?: string; contactid?: string; paid?: string; billed?: string; sort?: string }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
+        if (args.starttmp) queryParams.starttmp = args.starttmp;
+        if (args.endtmp) queryParams.endtmp = args.endtmp;
+        if (args.contactid) queryParams.contactid = args.contactid;
+        if (args.paid) queryParams.paid = args.paid;
+        if (args.billed) queryParams.billed = args.billed;
+        if (args.sort) queryParams.sort = args.sort;
         return client.get(`/documents/${args.docType}`, queryParams);
       },
     },

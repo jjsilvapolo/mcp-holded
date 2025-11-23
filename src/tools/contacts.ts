@@ -4,7 +4,7 @@ export function getContactTools(client: HoldedClient) {
   return {
     // List Contacts
     list_contacts: {
-      description: 'List all contacts with optional pagination',
+      description: 'List all contacts with optional filters for phone, mobile, or custom ID',
       inputSchema: {
         type: 'object' as const,
         properties: {
@@ -12,12 +12,28 @@ export function getContactTools(client: HoldedClient) {
             type: 'number',
             description: 'Page number for pagination (optional)',
           },
+          phone: {
+            type: 'string',
+            description: 'Filter by exact phone number match',
+          },
+          mobile: {
+            type: 'string',
+            description: 'Filter by exact mobile number match',
+          },
+          customId: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Filter by custom ID(s)',
+          },
         },
         required: [],
       },
-      handler: async (args: { page?: number }) => {
+      handler: async (args: { page?: number; phone?: string; mobile?: string; customId?: string[] }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
+        if (args.phone) queryParams.phone = args.phone;
+        if (args.mobile) queryParams.mobile = args.mobile;
+        if (args.customId) queryParams['customId[]'] = args.customId.join(',');
         return client.get('/contacts', queryParams);
       },
     },
