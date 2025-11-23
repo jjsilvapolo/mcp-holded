@@ -1,0 +1,110 @@
+import { HoldedClient } from '../holded-client.js';
+
+export function getPaymentTools(client: HoldedClient) {
+  return {
+    // List Payments
+    list_payments: {
+      description: 'List all payments with optional pagination',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          page: {
+            type: 'number',
+            description: 'Page number for pagination (optional)',
+          },
+        },
+        required: [],
+      },
+      handler: async (args: { page?: number }) => {
+        const queryParams: Record<string, string | number> = {};
+        if (args.page) queryParams.page = args.page;
+        return client.get('/payments', queryParams);
+      },
+    },
+
+    // Create Payment
+    create_payment: {
+      description: 'Create a new payment',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          name: {
+            type: 'string',
+            description: 'Payment method name',
+          },
+          days: {
+            type: 'number',
+            description: 'Days until due',
+          },
+        },
+        required: ['name'],
+      },
+      handler: async (args: Record<string, unknown>) => {
+        return client.post('/payments', args);
+      },
+    },
+
+    // Get Payment
+    get_payment: {
+      description: 'Get a specific payment by ID',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          paymentId: {
+            type: 'string',
+            description: 'Payment ID',
+          },
+        },
+        required: ['paymentId'],
+      },
+      handler: async (args: { paymentId: string }) => {
+        return client.get(`/payments/${args.paymentId}`);
+      },
+    },
+
+    // Update Payment
+    update_payment: {
+      description: 'Update an existing payment',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          paymentId: {
+            type: 'string',
+            description: 'Payment ID to update',
+          },
+          name: {
+            type: 'string',
+            description: 'Payment method name',
+          },
+          days: {
+            type: 'number',
+            description: 'Days until due',
+          },
+        },
+        required: ['paymentId'],
+      },
+      handler: async (args: { paymentId: string; [key: string]: unknown }) => {
+        const { paymentId, ...body } = args;
+        return client.put(`/payments/${paymentId}`, body);
+      },
+    },
+
+    // Delete Payment
+    delete_payment: {
+      description: 'Delete a payment',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          paymentId: {
+            type: 'string',
+            description: 'Payment ID to delete',
+          },
+        },
+        required: ['paymentId'],
+      },
+      handler: async (args: { paymentId: string }) => {
+        return client.delete(`/payments/${args.paymentId}`);
+      },
+    },
+  };
+}

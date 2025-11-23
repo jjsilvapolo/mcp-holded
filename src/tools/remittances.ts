@@ -1,0 +1,36 @@
+import { HoldedClient } from '../holded-client.js';
+
+export function getRemittanceTools(client: HoldedClient) {
+  return {
+    // List Remittances
+    list_remittances: {
+      description: 'List all remittances',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {},
+        required: [],
+      },
+      handler: async () => {
+        return client.get('/remittances');
+      },
+    },
+
+    // Get Remittance
+    get_remittance: {
+      description: 'Get a specific remittance by ID',
+      inputSchema: {
+        type: 'object' as const,
+        properties: {
+          remittanceId: {
+            type: 'string',
+            description: 'Remittance ID',
+          },
+        },
+        required: ['remittanceId'],
+      },
+      handler: async (args: { remittanceId: string }) => {
+        return client.get(`/remittances/${args.remittanceId}`);
+      },
+    },
+  };
+}

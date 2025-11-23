@@ -1,0 +1,39 @@
+{
+  "name": "@iamsamuelfraga/mcp-holded",
+  "version": "1.0.0",
+  "description": "MCP Server for Holded Invoice API",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "mcp-holded": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "holded",
+    "invoice",
+    "api",
+    "claude"
+  ],
+  "author": "Samuel Fraga",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamsamuelfraga/mcp-holded.git"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
