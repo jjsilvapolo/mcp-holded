@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.2.6...v1.3.0) (2025-12-11)
+
+
+### Features
+
+* add mcpName field required by MCP registry ([8576e7d](https://github.com/iamsamuelfraga/mcp-holded/commit/8576e7d12afb6f1f2cf868f0638c888a587c6a92))
+
 ## [1.2.6](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.2.5...v1.2.6) (2025-12-11)
 
 
