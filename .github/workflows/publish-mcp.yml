@@ -35,15 +35,16 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "Updating server.json version to $VERSION"
-          node -e "
+          node <<EOF
             const fs = require('fs');
             const server = JSON.parse(fs.readFileSync('server.json', 'utf8'));
-            server.version = process.env.VERSION;
+            server.version = '$VERSION';
             if (server.packages && server.packages[0]) {
-              server.packages[0].version = process.env.VERSION;
+              server.packages[0].version = '$VERSION';
             }
             fs.writeFileSync('server.json', JSON.stringify(server, null, 2) + '\n');
-          " VERSION=$VERSION
+            console.log('Version updated to: $VERSION');
+          EOF
           echo "Updated server.json:"
           cat server.json
 
