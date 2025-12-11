@@ -10,6 +10,7 @@ export function getRemittanceTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/remittances');
       },
@@ -28,6 +29,7 @@ export function getRemittanceTools(client: HoldedClient) {
         },
         required: ['remittanceId'],
       },
+      readOnlyHint: true,
       handler: async (args: { remittanceId: string }) => {
         return client.get(`/remittances/${args.remittanceId}`);
       },

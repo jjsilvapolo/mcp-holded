@@ -15,6 +15,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: [],
       },
+      readOnlyHint: true,
       handler: async (args: { page?: number }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
@@ -68,6 +69,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/products', args);
       },
@@ -86,6 +88,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId'],
       },
+      readOnlyHint: true,
       handler: async (args: { productId: string }) => {
         return client.get(`/products/${args.productId}`);
       },
@@ -132,6 +135,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId'],
       },
+      destructiveHint: true,
       handler: async (args: { productId: string; [key: string]: unknown }) => {
         const { productId, ...body } = args;
         return client.put(`/products/${productId}`, body);
@@ -151,6 +155,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId'],
       },
+      destructiveHint: true,
       handler: async (args: { productId: string }) => {
         return client.delete(`/products/${args.productId}`);
       },
@@ -169,6 +174,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId'],
       },
+      readOnlyHint: true,
       handler: async (args: { productId: string }) => {
         return client.get(`/products/${args.productId}/image`);
       },
@@ -187,6 +193,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId'],
       },
+      readOnlyHint: true,
       handler: async (args: { productId: string }) => {
         return client.get(`/products/${args.productId}/images`);
       },
@@ -209,6 +216,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId', 'imageId'],
       },
+      readOnlyHint: true,
       handler: async (args: { productId: string; imageId: string }) => {
         return client.get(`/products/${args.productId}/images/${args.imageId}`);
       },
@@ -235,6 +243,7 @@ export function getProductTools(client: HoldedClient) {
         },
         required: ['productId', 'units'],
       },
+      destructiveHint: true,
       handler: async (args: { productId: string; warehouseId?: string; units: number }) => {
         const body: Record<string, unknown> = { units: args.units };
         if (args.warehouseId) body.warehouseId = args.warehouseId;

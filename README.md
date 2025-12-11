@@ -31,7 +31,7 @@ This MCP server provides access to the complete Holded Invoice API:
 
 ### Prerequisites
 
-- Node.js 18 or higher
+- Node.js 22.14 or higher
 - A Holded account with API access
 - Your Holded API key (get it from Holded Settings > API)
 
@@ -174,9 +174,25 @@ npm run build
 npm run dev
 ```
 
+## Privacy Policy
+
+**Data Collection**: This MCP server requires your Holded API key to function. The API key is read from your local environment variable (`HOLDED_API_KEY`) and is never stored by this server. All API requests and responses are passed through in real-time to facilitate communication between your AI assistant and the Holded API.
+
+**Data Usage & Sharing**: Your API key and all data processed through this server are used exclusively to interact with the Holded API on your behalf. The server acts as a pass-through proxy - it does not store, log, or retain any data. Your Holded API key and data are transmitted only to Holded's official API endpoints (api.holded.com). No data is shared with any third parties beyond Holded.
+
+**Your Security**: We recommend following security best practices: store your API key in environment variables (never commit it to version control), regularly update to the latest version, and review the permissions granted to this MCP server in your AI assistant. For more information, see our [full Privacy Policy](PRIVACY.md).
+
+## Support
+
+For questions, issues, or feature requests:
+
+- **GitHub Issues**: [Report an issue](https://github.com/iamsamuelfraga/mcp-holded/issues)
+- **Email**: hi@samuelfraga.com
+- **Documentation**: [Holded API Docs](https://developers.holded.com/reference/documents)
+
 ## License
 
-MIT
+MIT - See [LICENSE](LICENSE) file for details.
 
 ## Author
 
@@ -189,3 +205,4 @@ Samuel Fraga
 
 - [Holded API Documentation](https://developers.holded.com/reference/documents)
 - [MCP Specification](https://modelcontextprotocol.io/)
+- [Privacy Policy](PRIVACY.md)

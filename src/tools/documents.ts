@@ -74,6 +74,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType'],
       },
+      readOnlyHint: true,
       handler: async (args: {
         docType: DocumentType;
         page?: number;
@@ -170,6 +171,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'contactId', 'items'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: DocumentType; [key: string]: unknown }) => {
         const { docType, ...body } = args;
         return client.post(`/documents/${docType}`, body);
@@ -206,6 +208,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      readOnlyHint: true,
       handler: async (args: { docType: DocumentType; documentId: string }) => {
         return client.get(`/documents/${args.docType}/${args.documentId}`);
       },
@@ -257,6 +260,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      destructiveHint: true,
       handler: async (args: {
         docType: DocumentType;
         documentId: string;
@@ -297,6 +301,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: DocumentType; documentId: string }) => {
         return client.delete(`/documents/${args.docType}/${args.documentId}`);
       },
@@ -344,6 +349,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId', 'amount'],
       },
+      destructiveHint: true,
       handler: async (args: {
         docType: DocumentType;
         documentId: string;
@@ -397,6 +403,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId', 'emails'],
       },
+      destructiveHint: true,
       handler: async (args: {
         docType: DocumentType;
         documentId: string;
@@ -437,6 +444,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      readOnlyHint: true,
       handler: async (args: { docType: DocumentType; documentId: string }) => {
         return client.get(`/documents/${args.docType}/${args.documentId}/pdf`);
       },
@@ -472,6 +480,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: DocumentType; documentId: string }) => {
         return client.post(`/documents/${args.docType}/${args.documentId}/ship`);
       },
@@ -518,6 +527,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId', 'lines'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: DocumentType; documentId: string; lines: unknown }) => {
         return client.post(`/documents/${args.docType}/${args.documentId}/ship`, {
           lines: args.lines,
@@ -555,6 +565,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      readOnlyHint: true,
       handler: async (args: { docType: DocumentType; documentId: string }) => {
         return client.get(`/documents/${args.docType}/${args.documentId}/shipped`);
       },
@@ -598,6 +609,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId', 'fileBase64', 'filename'],
       },
+      destructiveHint: true,
       handler: async (args: {
         docType: DocumentType;
         documentId: string;
@@ -651,6 +663,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId'],
       },
+      destructiveHint: true,
       handler: async (args: {
         docType: DocumentType;
         documentId: string;
@@ -699,6 +712,7 @@ export function getDocumentTools(client: HoldedClient) {
         },
         required: ['docType', 'documentId', 'pipelineId', 'stageId'],
       },
+      destructiveHint: true,
       handler: async (args: {
         docType: DocumentType;
         documentId: string;
@@ -720,6 +734,7 @@ export function getDocumentTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/paymentmethods');
       },

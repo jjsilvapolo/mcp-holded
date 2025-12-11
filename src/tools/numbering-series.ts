@@ -28,6 +28,7 @@ export function getNumberingSeriesTools(client: HoldedClient) {
         },
         required: ['docType'],
       },
+      readOnlyHint: true,
       handler: async (args: { docType: string }) => {
         return client.get(`/numberseries/${args.docType}`);
       },
@@ -71,6 +72,7 @@ export function getNumberingSeriesTools(client: HoldedClient) {
         },
         required: ['docType', 'name'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: string; [key: string]: unknown }) => {
         const { docType, ...body } = args;
         return client.post(`/numberseries/${docType}`, body);
@@ -119,6 +121,7 @@ export function getNumberingSeriesTools(client: HoldedClient) {
         },
         required: ['docType', 'serieId'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: string; serieId: string; [key: string]: unknown }) => {
         const { docType, serieId, ...body } = args;
         return client.put(`/numberseries/${docType}/${serieId}`, body);
@@ -155,6 +158,7 @@ export function getNumberingSeriesTools(client: HoldedClient) {
         },
         required: ['docType', 'serieId'],
       },
+      destructiveHint: true,
       handler: async (args: { docType: string; serieId: string }) => {
         return client.delete(`/numberseries/${args.docType}/${args.serieId}`);
       },

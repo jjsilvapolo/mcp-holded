@@ -10,6 +10,7 @@ export function getSalesChannelTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/saleschannels');
       },
@@ -28,6 +29,7 @@ export function getSalesChannelTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/saleschannels', args);
       },
@@ -46,6 +48,7 @@ export function getSalesChannelTools(client: HoldedClient) {
         },
         required: ['channelId'],
       },
+      readOnlyHint: true,
       handler: async (args: { channelId: string }) => {
         return client.get(`/saleschannels/${args.channelId}`);
       },
@@ -68,6 +71,7 @@ export function getSalesChannelTools(client: HoldedClient) {
         },
         required: ['channelId'],
       },
+      destructiveHint: true,
       handler: async (args: { channelId: string; [key: string]: unknown }) => {
         const { channelId, ...body } = args;
         return client.put(`/saleschannels/${channelId}`, body);
@@ -87,6 +91,7 @@ export function getSalesChannelTools(client: HoldedClient) {
         },
         required: ['channelId'],
       },
+      destructiveHint: true,
       handler: async (args: { channelId: string }) => {
         return client.delete(`/saleschannels/${args.channelId}`);
       },

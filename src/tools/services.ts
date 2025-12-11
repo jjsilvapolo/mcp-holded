@@ -15,6 +15,7 @@ export function getServiceTools(client: HoldedClient) {
         },
         required: [],
       },
+      readOnlyHint: true,
       handler: async (args: { page?: number }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
@@ -51,6 +52,7 @@ export function getServiceTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/services', args);
       },
@@ -69,6 +71,7 @@ export function getServiceTools(client: HoldedClient) {
         },
         required: ['serviceId'],
       },
+      readOnlyHint: true,
       handler: async (args: { serviceId: string }) => {
         return client.get(`/services/${args.serviceId}`);
       },
@@ -107,6 +110,7 @@ export function getServiceTools(client: HoldedClient) {
         },
         required: ['serviceId'],
       },
+      destructiveHint: true,
       handler: async (args: { serviceId: string; [key: string]: unknown }) => {
         const { serviceId, ...body } = args;
         return client.put(`/services/${serviceId}`, body);
@@ -126,6 +130,7 @@ export function getServiceTools(client: HoldedClient) {
         },
         required: ['serviceId'],
       },
+      destructiveHint: true,
       handler: async (args: { serviceId: string }) => {
         return client.delete(`/services/${args.serviceId}`);
       },

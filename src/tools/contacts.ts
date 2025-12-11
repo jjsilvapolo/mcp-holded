@@ -28,6 +28,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: [],
       },
+      readOnlyHint: true,
       handler: async (args: {
         page?: number;
         phone?: string;
@@ -104,6 +105,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/contacts', args);
       },
@@ -122,6 +124,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: ['contactId'],
       },
+      readOnlyHint: true,
       handler: async (args: { contactId: string }) => {
         return client.get(`/contacts/${args.contactId}`);
       },
@@ -165,6 +168,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: ['contactId'],
       },
+      destructiveHint: true,
       handler: async (args: { contactId: string; [key: string]: unknown }) => {
         const { contactId, ...body } = args;
         return client.put(`/contacts/${contactId}`, body);
@@ -184,6 +188,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: ['contactId'],
       },
+      destructiveHint: true,
       handler: async (args: { contactId: string }) => {
         return client.delete(`/contacts/${args.contactId}`);
       },
@@ -202,6 +207,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: ['contactId'],
       },
+      readOnlyHint: true,
       handler: async (args: { contactId: string }) => {
         return client.get(`/contacts/${args.contactId}/attachments`);
       },
@@ -224,6 +230,7 @@ export function getContactTools(client: HoldedClient) {
         },
         required: ['contactId', 'attachmentId'],
       },
+      readOnlyHint: true,
       handler: async (args: { contactId: string; attachmentId: string }) => {
         return client.get(`/contacts/${args.contactId}/attachments/${args.attachmentId}`);
       },

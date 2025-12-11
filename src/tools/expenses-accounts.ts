@@ -10,6 +10,7 @@ export function getExpensesAccountTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/expensesaccounts');
       },
@@ -32,6 +33,7 @@ export function getExpensesAccountTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/expensesaccounts', args);
       },
@@ -50,6 +52,7 @@ export function getExpensesAccountTools(client: HoldedClient) {
         },
         required: ['accountId'],
       },
+      readOnlyHint: true,
       handler: async (args: { accountId: string }) => {
         return client.get(`/expensesaccounts/${args.accountId}`);
       },
@@ -76,6 +79,7 @@ export function getExpensesAccountTools(client: HoldedClient) {
         },
         required: ['accountId'],
       },
+      destructiveHint: true,
       handler: async (args: { accountId: string; [key: string]: unknown }) => {
         const { accountId, ...body } = args;
         return client.put(`/expensesaccounts/${accountId}`, body);
@@ -95,6 +99,7 @@ export function getExpensesAccountTools(client: HoldedClient) {
         },
         required: ['accountId'],
       },
+      destructiveHint: true,
       handler: async (args: { accountId: string }) => {
         return client.delete(`/expensesaccounts/${args.accountId}`);
       },

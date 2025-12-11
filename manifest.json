@@ -1,0 +1,81 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/mcpb/main/dist/mcpb-manifest.schema.json",
+  "manifest_version": "0.3",
+  "name": "mcp-holded",
+  "display_name": "Holded MCP Server",
+  "version": "1.0.1",
+  "description": "MCP Server for Holded Invoice API - Manage invoices, contacts, products, and more",
+  "long_description": "A comprehensive Model Context Protocol (MCP) server that provides AI assistants like Claude with access to the complete Holded Invoice API. This server enables seamless interaction with Holded's invoicing system, allowing you to manage documents (invoices, estimates, credit notes), contacts (clients and suppliers), products, treasury accounts, expenses, and more - all through natural language commands.\n\n**Features:**\n- 72 tools covering all major Holded API endpoints\n- Full document lifecycle management (create, read, update, delete, pay, send, get PDF)\n- Contact and product management with attachments and images\n- Treasury and expense account handling\n- Comprehensive sales channel, warehouse, and payment configuration\n- Tax and numbering series management\n- Contact groups and remittances support",
+
+  "author": {
+    "name": "Samuel Fraga",
+    "email": "hi@samuelfraga.com",
+    "url": "https://github.com/iamsamuelfraga"
+  },
+
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "HOLDED_API_KEY": "${user_config.holded_api_key}"
+      }
+    }
+  },
+
+  "tools_generated": true,
+
+  "keywords": [
+    "holded",
+    "invoice",
+    "invoicing",
+    "accounting",
+    "erp",
+    "api",
+    "mcp",
+    "claude",
+    "contacts",
+    "products",
+    "treasury",
+    "expenses",
+    "documents",
+    "sales",
+    "business",
+    "finance"
+  ],
+
+  "license": "MIT",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamsamuelfraga/mcp-holded.git"
+  },
+
+  "homepage": "https://github.com/iamsamuelfraga/mcp-holded",
+  "documentation": "https://github.com/iamsamuelfraga/mcp-holded#readme",
+  "support": "https://github.com/iamsamuelfraga/mcp-holded/issues",
+
+  "privacy_policies": [
+    "https://iamsamuelfraga.github.io/mcp-holded/privacy"
+  ],
+
+  "user_config": {
+    "holded_api_key": {
+      "type": "string",
+      "title": "Holded API Key",
+      "description": "Your Holded API key from Holded Settings > API",
+      "required": true,
+      "sensitive": true
+    }
+  },
+
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=22.14.0"
+    }
+  }
+}

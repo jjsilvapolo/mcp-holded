@@ -10,6 +10,7 @@ export function getTreasuryTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/treasury');
       },
@@ -40,6 +41,7 @@ export function getTreasuryTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/treasury', args);
       },
@@ -58,6 +60,7 @@ export function getTreasuryTools(client: HoldedClient) {
         },
         required: ['treasuryId'],
       },
+      readOnlyHint: true,
       handler: async (args: { treasuryId: string }) => {
         return client.get(`/treasury/${args.treasuryId}`);
       },

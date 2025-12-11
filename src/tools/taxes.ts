@@ -10,6 +10,7 @@ export function getTaxTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/taxes');
       },

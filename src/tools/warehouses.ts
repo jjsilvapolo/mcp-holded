@@ -10,6 +10,7 @@ export function getWarehouseTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/warehouses');
       },
@@ -48,6 +49,7 @@ export function getWarehouseTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/warehouses', args);
       },
@@ -70,6 +72,7 @@ export function getWarehouseTools(client: HoldedClient) {
         },
         required: ['warehouseId'],
       },
+      readOnlyHint: true,
       handler: async (args: { warehouseId: string; page?: number }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
@@ -90,6 +93,7 @@ export function getWarehouseTools(client: HoldedClient) {
         },
         required: ['warehouseId'],
       },
+      readOnlyHint: true,
       handler: async (args: { warehouseId: string }) => {
         return client.get(`/warehouses/${args.warehouseId}`);
       },
@@ -132,6 +136,7 @@ export function getWarehouseTools(client: HoldedClient) {
         },
         required: ['warehouseId'],
       },
+      destructiveHint: true,
       handler: async (args: { warehouseId: string; [key: string]: unknown }) => {
         const { warehouseId, ...body } = args;
         return client.put(`/warehouses/${warehouseId}`, body);
@@ -151,6 +156,7 @@ export function getWarehouseTools(client: HoldedClient) {
         },
         required: ['warehouseId'],
       },
+      destructiveHint: true,
       handler: async (args: { warehouseId: string }) => {
         return client.delete(`/warehouses/${args.warehouseId}`);
       },

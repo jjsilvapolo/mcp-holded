@@ -10,6 +10,7 @@ export function getContactGroupTools(client: HoldedClient) {
         properties: {},
         required: [],
       },
+      readOnlyHint: true,
       handler: async () => {
         return client.get('/contactgroups');
       },
@@ -28,6 +29,7 @@ export function getContactGroupTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/contactgroups', args);
       },
@@ -46,6 +48,7 @@ export function getContactGroupTools(client: HoldedClient) {
         },
         required: ['groupId'],
       },
+      readOnlyHint: true,
       handler: async (args: { groupId: string }) => {
         return client.get(`/contactgroups/${args.groupId}`);
       },
@@ -68,6 +71,7 @@ export function getContactGroupTools(client: HoldedClient) {
         },
         required: ['groupId'],
       },
+      destructiveHint: true,
       handler: async (args: { groupId: string; [key: string]: unknown }) => {
         const { groupId, ...body } = args;
         return client.put(`/contactgroups/${groupId}`, body);
@@ -87,6 +91,7 @@ export function getContactGroupTools(client: HoldedClient) {
         },
         required: ['groupId'],
       },
+      destructiveHint: true,
       handler: async (args: { groupId: string }) => {
         return client.delete(`/contactgroups/${args.groupId}`);
       },

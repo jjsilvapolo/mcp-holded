@@ -23,6 +23,7 @@ export function getPaymentTools(client: HoldedClient) {
         },
         required: [],
       },
+      readOnlyHint: true,
       handler: async (args: { page?: number; starttmp?: string; endtmp?: string }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
@@ -55,6 +56,7 @@ export function getPaymentTools(client: HoldedClient) {
         },
         required: ['name'],
       },
+      destructiveHint: true,
       handler: async (args: Record<string, unknown>) => {
         return client.post('/payments', args);
       },
@@ -73,6 +75,7 @@ export function getPaymentTools(client: HoldedClient) {
         },
         required: ['paymentId'],
       },
+      readOnlyHint: true,
       handler: async (args: { paymentId: string }) => {
         return client.get(`/payments/${args.paymentId}`);
       },
@@ -99,6 +102,7 @@ export function getPaymentTools(client: HoldedClient) {
         },
         required: ['paymentId'],
       },
+      destructiveHint: true,
       handler: async (args: { paymentId: string; [key: string]: unknown }) => {
         const { paymentId, ...body } = args;
         return client.put(`/payments/${paymentId}`, body);
@@ -118,6 +122,7 @@ export function getPaymentTools(client: HoldedClient) {
         },
         required: ['paymentId'],
       },
+      destructiveHint: true,
       handler: async (args: { paymentId: string }) => {
         return client.delete(`/payments/${args.paymentId}`);
       },
