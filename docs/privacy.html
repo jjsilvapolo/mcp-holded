@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - MCP Holded</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #444;
+        }
+        h3 {
+            color: #555;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .last-updated {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Privacy Policy</h1>
+
+    <p class="last-updated"><strong>Last Updated</strong>: December 11, 2025</p>
+
+    <p>This Privacy Policy describes how the MCP Holded server ("the Server", "we", "our") handles data when you use it to connect your AI assistant to the Holded Invoice API.</p>
+
+    <h2>1. Overview</h2>
+
+    <p>The MCP Holded server is an open-source Model Context Protocol (MCP) server that acts as a bridge between AI assistants (like Claude) and the Holded Invoice API. This server runs locally on your machine and does not operate any cloud services or remote servers that process your data.</p>
+
+    <h2>2. Data Collection</h2>
+
+    <h3>2.1 What Data We Collect</h3>
+
+    <p>The Server requires and processes the following data:</p>
+
+    <ul>
+        <li><strong>Holded API Key</strong>: Your personal API key from Holded, provided via the <code>HOLDED_API_KEY</code> environment variable</li>
+        <li><strong>API Request Data</strong>: Data you or your AI assistant send through the Server to interact with Holded (e.g., invoice details, contact information, product data)</li>
+        <li><strong>API Response Data</strong>: Data returned from the Holded API in response to your requests</li>
+    </ul>
+
+    <h3>2.2 How Data is Collected</h3>
+
+    <ul>
+        <li>The API key is read from your local environment variables when the Server starts</li>
+        <li>Request and response data flows through the Server during runtime as you interact with your AI assistant</li>
+        <li>No data is collected, transmitted, or stored beyond the immediate request-response cycle</li>
+    </ul>
+
+    <h2>3. Data Usage</h2>
+
+    <h3>3.1 How We Use Your Data</h3>
+
+    <p>Your data is used exclusively for the following purposes:</p>
+
+    <ul>
+        <li><strong>API Authentication</strong>: Your Holded API key authenticates requests to the Holded API</li>
+        <li><strong>Request Proxying</strong>: The Server forwards your requests to the appropriate Holded API endpoints</li>
+        <li><strong>Response Delivery</strong>: API responses are returned to your AI assistant for processing and presentation</li>
+    </ul>
+
+    <h3>3.2 What We Don't Do With Your Data</h3>
+
+    <p>The Server does NOT:</p>
+
+    <ul>
+        <li>Store your API key or any request/response data persistently</li>
+        <li>Log API requests, responses, or your API key to disk</li>
+        <li>Analyze, profile, or perform any secondary processing on your data</li>
+        <li>Use your data for training, analytics, or improvement purposes</li>
+        <li>Transmit your data to any servers or services operated by the maintainers of this project</li>
+    </ul>
+
+    <h2>4. Data Storage and Retention</h2>
+
+    <h3>4.1 No Persistent Storage</h3>
+
+    <p>The Server does not store any data persistently. All data exists only in memory during the runtime of each request and is immediately discarded after the response is delivered.</p>
+
+    <h3>4.2 Temporary Memory Usage</h3>
+
+    <p>During request processing:</p>
+
+    <ul>
+        <li>Your API key is held in memory for the lifetime of the Server process</li>
+        <li>Request and response data exists in memory only for the duration of each individual API call (typically milliseconds to seconds)</li>
+    </ul>
+
+    <h2>5. Data Sharing and Third-Party Access</h2>
+
+    <h3>5.1 Holded API</h3>
+
+    <p>Your API key and request data are transmitted to:</p>
+
+    <ul>
+        <li><strong>Service</strong>: Holded Invoice API</li>
+        <li><strong>Purpose</strong>: To fulfill your requests for invoicing, contacts, products, and other Holded functionality</li>
+        <li><strong>Endpoint</strong>: https://api.holded.com/api/invoicing/v1/</li>
+        <li><strong>Privacy Policy</strong>: <a href="https://www.holded.com/legal/privacy-policy">Holded's Privacy Policy</a></li>
+    </ul>
+
+    <p>The Holded API is operated by Holded and is subject to their own privacy policy and terms of service.</p>
+
+    <h3>5.2 No Other Third Parties</h3>
+
+    <p>Your data is NOT shared with:</p>
+
+    <ul>
+        <li>The maintainers or contributors of this open-source project</li>
+        <li>Any analytics services</li>
+        <li>Any telemetry or error reporting services</li>
+        <li>Any other third-party services or APIs</li>
+    </ul>
+
+    <h3>5.3 AI Assistant Provider</h3>
+
+    <p>If you use this Server with an AI assistant (e.g., Claude Desktop), the AI assistant provider may receive data according to their own privacy practices. Please review the privacy policy of your AI assistant provider:</p>
+
+    <ul>
+        <li><strong>Claude</strong>: <a href="https://www.anthropic.com/privacy">Anthropic's Privacy Policy</a></li>
+    </ul>
+
+    <h2>6. Data Security</h2>
+
+    <h3>6.1 Transmission Security</h3>
+
+    <ul>
+        <li>All communications with the Holded API use HTTPS encryption</li>
+        <li>The Server runs locally on your machine, eliminating network exposure to untrusted parties</li>
+    </ul>
+
+    <h3>6.2 Your Responsibilities</h3>
+
+    <p>To maintain the security of your data:</p>
+
+    <ul>
+        <li><strong>Never commit your API key to version control</strong> (use environment variables only)</li>
+        <li><strong>Use environment variables</strong> for sensitive configuration</li>
+        <li><strong>Regularly update</strong> to the latest version for security patches</li>
+        <li><strong>Review permissions</strong> granted to the MCP server in your AI assistant</li>
+        <li><strong>Follow the Security Policy</strong> available at <a href="https://github.com/iamsamuelfraga/mcp-holded/blob/main/SECURITY.md">SECURITY.md</a></li>
+    </ul>
+
+    <h3>6.3 API Key Protection</h3>
+
+    <p>Your Holded API key grants full access to your Holded account. Protect it as you would a password:</p>
+
+    <ul>
+        <li>Store it securely in environment variables</li>
+        <li>Never share it publicly or include it in code</li>
+        <li>Revoke and regenerate it immediately if you suspect it has been compromised</li>
+        <li>Manage API key access through Holded's settings at: Settings &gt; API</li>
+    </ul>
+
+    <h2>7. Open Source Transparency</h2>
+
+    <p>This Server is open source and available at:</p>
+
+    <ul>
+        <li><strong>Repository</strong>: <a href="https://github.com/iamsamuelfraga/mcp-holded">https://github.com/iamsamuelfraga/mcp-holded</a></li>
+        <li><strong>License</strong>: MIT License</li>
+    </ul>
+
+    <p>You can inspect the source code to verify:</p>
+
+    <ul>
+        <li>No data storage mechanisms are implemented</li>
+        <li>No logging of sensitive data occurs</li>
+        <li>No telemetry or analytics are collected</li>
+        <li>All API calls go directly to Holded's official endpoints</li>
+    </ul>
+
+    <h2>8. Your Rights</h2>
+
+    <h3>8.1 Data Access and Control</h3>
+
+    <p>Since the Server does not store any data:</p>
+
+    <ul>
+        <li>You have complete control over your data at all times</li>
+        <li>Your data is never retained beyond the request-response cycle</li>
+        <li>You can stop using the Server at any time without data removal concerns</li>
+    </ul>
+
+    <h3>8.2 Your Holded Data</h3>
+
+    <p>For rights regarding data stored in your Holded account:</p>
+
+    <ul>
+        <li>Contact Holded directly or review their privacy policy</li>
+        <li>Use Holded's data export and deletion features</li>
+        <li>Manage your data through the Holded web interface</li>
+    </ul>
+
+    <h2>9. Children's Privacy</h2>
+
+    <p>This Server is not directed to individuals under the age of 18. We do not knowingly collect or process data from children. If you become aware that a child has provided data through this Server, please contact us.</p>
+
+    <h2>10. International Data Transfers</h2>
+
+    <p>The Server runs locally on your machine. However, when you send requests to the Holded API:</p>
+
+    <ul>
+        <li>Your data is transmitted to Holded's servers (location depends on Holded's infrastructure)</li>
+        <li>Data protection depends on Holded's policies and compliance measures</li>
+        <li>Please review Holded's privacy policy for information about their data handling practices</li>
+    </ul>
+
+    <h2>11. Changes to This Privacy Policy</h2>
+
+    <p>We may update this Privacy Policy from time to time. Changes will be:</p>
+
+    <ul>
+        <li>Documented in this file with an updated "Last Updated" date</li>
+        <li>Announced in release notes for new versions</li>
+        <li>Available in the repository's version history</li>
+    </ul>
+
+    <p>Continued use of the Server after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>12. Legal Compliance</h2>
+
+    <p>This Server is designed to be compliant with:</p>
+
+    <ul>
+        <li>General Data Protection Regulation (GDPR)</li>
+        <li>California Consumer Privacy Act (CCPA)</li>
+        <li>Other applicable data protection laws</li>
+    </ul>
+
+    <p>Since we do not store or process data beyond immediate request handling, most data subject rights are not applicable. For rights related to your Holded data, contact Holded directly.</p>
+
+    <h2>13. Contact Information</h2>
+
+    <h3>13.1 Project Maintainer</h3>
+
+    <p>For questions about this Privacy Policy or the Server's data handling:</p>
+
+    <ul>
+        <li><strong>Author</strong>: Samuel Fraga</li>
+        <li><strong>GitHub</strong>: <a href="https://github.com/iamsamuelfraga">@iamsamuelfraga</a></li>
+        <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/samuel-fraga/">Samuel Fraga</a></li>
+        <li><strong>Repository Issues</strong>: <a href="https://github.com/iamsamuelfraga/mcp-holded/issues">https://github.com/iamsamuelfraga/mcp-holded/issues</a></li>
+    </ul>
+
+    <h3>13.2 Security Concerns</h3>
+
+    <p>For security-related issues:</p>
+
+    <ul>
+        <li>Review our <a href="https://github.com/iamsamuelfraga/mcp-holded/blob/main/SECURITY.md">Security Policy</a></li>
+        <li>Report vulnerabilities privately (do not open public issues)</li>
+        <li>Email the maintainer directly or use GitHub's private vulnerability reporting</li>
+    </ul>
+
+    <h3>13.3 Holded-Related Data Issues</h3>
+
+    <p>For questions about data stored in your Holded account:</p>
+
+    <ul>
+        <li><strong>Holded Support</strong>: Contact through your Holded account</li>
+        <li><strong>Holded Privacy</strong>: <a href="https://www.holded.com/legal/privacy-policy">https://www.holded.com/legal/privacy-policy</a></li>
+    </ul>
+
+    <h2>14. Disclaimer</h2>
+
+    <p>This Server is provided "as is" without warranty of any kind. The maintainers are not responsible for:</p>
+
+    <ul>
+        <li>How Holded processes or stores your data</li>
+        <li>Data breaches or security issues in Holded's systems</li>
+        <li>Your AI assistant provider's data handling practices</li>
+        <li>Any damages resulting from use of this Server</li>
+    </ul>
+
+    <p>Use of this Server is at your own risk. You are responsible for securing your API key and reviewing the privacy policies of Holded and your AI assistant provider.</p>
+
+    <hr>
+
+    <p><strong>MIT License Notice</strong>: This project is licensed under the MIT License. See <a href="https://github.com/iamsamuelfraga/mcp-holded/blob/main/LICENSE">LICENSE</a> for full license text.</p>
+</body>
+</html>
