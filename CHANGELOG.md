@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.2.2...v1.2.3) (2025-12-11)
+
+
+### Bug Fixes
+
+* correct npm package version format for registry ([27e35d0](https://github.com/iamsamuelfraga/mcp-holded/commit/27e35d088ad4fcb9d0941cc07e86d9d57ffa9c17))
+
 ## [1.2.2](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.2.1...v1.2.2) (2025-12-11)
 
 
