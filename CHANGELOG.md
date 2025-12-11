@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.1.0...v1.1.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* update privacy policy URL to include .html extension ([bd111f9](https://github.com/iamsamuelfraga/mcp-holded/commit/bd111f9c9be0ce8f77b2310b07fe645381d5e87f))
+
 # [1.1.0](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.0.1...v1.1.0) (2025-12-11)
 
 
