@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/draft/server.schema.json",
+  "name": "io.github.iamsamuelfraga/mcp-holded",
+  "description": "Complete Holded Invoice API integration with 72 MCP tools for invoices, contacts, products, and more",
+  "version": "1.1.0",
+  "homepage": "https://github.com/iamsamuelfraga/mcp-holded",
+  "license": "MIT",
+  "author": {
+    "name": "Samuel Fraga",
+    "url": "https://github.com/iamsamuelfraga"
+  },
+  "sourceCode": "https://github.com/iamsamuelfraga/mcp-holded",
+  "package": {
+    "registryType": "npm",
+    "identifier": "@iamsamuelfraga/mcp-holded",
+    "version": "1.1.0"
+  },
+  "environmentVariables": {
+    "HOLDED_API_KEY": {
+      "description": "Your Holded API key (found in Holded Settings → API)",
+      "required": true
+    }
+  }
+}
