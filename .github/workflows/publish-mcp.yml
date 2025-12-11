@@ -44,6 +44,8 @@ jobs:
             }
             fs.writeFileSync('server.json', JSON.stringify(server, null, 2) + '\n');
           " VERSION=$VERSION
+          echo "Updated server.json:"
+          cat server.json
 
       - name: Download MCP Publisher
         run: |
