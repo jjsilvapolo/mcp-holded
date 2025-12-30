@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.3.0...v1.3.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* add node-fetch dependency to resolve fetch not defined error ([fe2a2a3](https://github.com/iamsamuelfraga/mcp-holded/commit/fe2a2a30ac00b35129b09f252f52412b512822c4))
+
 # [1.3.0](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.2.6...v1.3.0) (2025-12-11)
 
 
