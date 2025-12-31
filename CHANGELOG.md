@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.3.1...v1.3.2) (2025-12-31)
+
+
+### Performance Improvements
+
+* optimize list tools to return only essential fields ([20df98c](https://github.com/iamsamuelfraga/mcp-holded/commit/20df98c1d16ef98a6dae1721d18a7ae7be6f1155))
+
 ## [1.3.1](https://github.com/iamsamuelfraga/mcp-holded/compare/v1.3.0...v1.3.1) (2025-12-31)
 
 
