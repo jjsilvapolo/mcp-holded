@@ -14,7 +14,7 @@ describe('Tax Tools', () => {
 
   describe('get_taxes', () => {
     it('should get all taxes', async () => {
-      await tools.get_taxes.handler();
+      await tools.get_taxes.handler({});
       expect(client.get).toHaveBeenCalledWith('/taxes');
     });
   });

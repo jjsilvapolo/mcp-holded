@@ -44,6 +44,14 @@ export function getDocumentTools(client: HoldedClient) {
             type: 'number',
             description: 'Page number for pagination (optional)',
           },
+          limit: {
+            type: 'number',
+            description: 'Maximum number of items to return (default: 50, max: 500)',
+          },
+          summary: {
+            type: 'boolean',
+            description: 'Return only count and pagination metadata without items (default: false)',
+          },
           starttmp: {
             type: 'string',
             description: 'Starting timestamp (Unix timestamp) for filtering documents by date',
@@ -78,6 +86,8 @@ export function getDocumentTools(client: HoldedClient) {
       handler: async (args: {
         docType: DocumentType;
         page?: number;
+        limit?: number;
+        summary?: boolean;
         starttmp?: string;
         endtmp?: string;
         contactid?: string;
@@ -87,6 +97,7 @@ export function getDocumentTools(client: HoldedClient) {
       }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
+        if (args.limit) queryParams.limit = Math.min(args.limit, 500);
         if (args.starttmp) {
           queryParams.starttmp = args.starttmp;
           // If starttmp is provided but endtmp is not, default to current timestamp
@@ -102,7 +113,7 @@ export function getDocumentTools(client: HoldedClient) {
         const result = await client.get(`/documents/${args.docType}`, queryParams);
         // Filter to return only essential fields
         if (Array.isArray(result)) {
-          return result.map((doc: Record<string, unknown>) => ({
+          const filtered = result.map((doc: Record<string, unknown>) => ({
             id: doc.id,
             contact: doc.contact,
             contactName: doc.contactName,
@@ -111,6 +122,23 @@ export function getDocumentTools(client: HoldedClient) {
             total: doc.total,
             status: doc.status,
           }));
+          const limit = Math.min(args.limit ?? 50, 500);
+          const items = filtered.slice(0, limit);
+
+          // Summary mode: return only count and metadata
+          if (args.summary) {
+            return {
+              count: items.length,
+              hasMore: items.length === limit && filtered.length > limit,
+            };
+          }
+
+          return {
+            items,
+            page: args.page,
+            pageSize: items.length,
+            hasMore: items.length === limit && filtered.length > limit,
+          };
         }
         return result;
       },

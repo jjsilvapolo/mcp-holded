@@ -12,22 +12,48 @@ export function getServiceTools(client: HoldedClient) {
             type: 'number',
             description: 'Page number for pagination (optional)',
           },
+          limit: {
+            type: 'number',
+            description: 'Maximum number of items to return (default: 50, max: 500)',
+          },
+          summary: {
+            type: 'boolean',
+            description: 'Return only count and pagination metadata without items (default: false)',
+          },
         },
         required: [],
       },
       readOnlyHint: true,
-      handler: async (args: { page?: number }) => {
+      handler: async (args: { page?: number; limit?: number; summary?: boolean }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
+        if (args.limit) queryParams.limit = Math.min(args.limit, 500);
         const services = (await client.get('/services', queryParams)) as Array<
           Record<string, unknown>
         >;
-        return services.map((service) => ({
+        const limit = Math.min(args.limit ?? 50, 500);
+        const filtered = services.map((service) => ({
           id: service.id,
           name: service.name,
           price: service.price,
           tax: service.tax,
         }));
+        const items = filtered.slice(0, limit);
+
+        // Summary mode: return only count and metadata
+        if (args.summary) {
+          return {
+            count: items.length,
+            hasMore: items.length === limit && filtered.length > limit,
+          };
+        }
+
+        return {
+          items,
+          page: args.page,
+          pageSize: items.length,
+          hasMore: items.length === limit && filtered.length > limit,
+        };
       },
     },
 

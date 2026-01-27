@@ -14,7 +14,7 @@ describe('Treasury Tools', () => {
 
   describe('list_treasuries', () => {
     it('should list all treasuries', async () => {
-      await tools.list_treasuries.handler();
+      await tools.list_treasuries.handler({});
       expect(client.get).toHaveBeenCalledWith('/treasury');
     });
   });

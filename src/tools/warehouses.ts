@@ -74,14 +74,54 @@ export function getWarehouseTools(client: HoldedClient) {
             type: 'number',
             description: 'Page number for pagination (optional)',
           },
+          limit: {
+            type: 'number',
+            description: 'Maximum number of items to return (default: 50, max: 500)',
+          },
+          summary: {
+            type: 'boolean',
+            description: 'Return only count and pagination metadata without items (default: false)',
+          },
         },
         required: ['warehouseId'],
       },
       readOnlyHint: true,
-      handler: async (args: { warehouseId: string; page?: number }) => {
+      handler: async (args: {
+        warehouseId: string;
+        page?: number;
+        limit?: number;
+        summary?: boolean;
+      }) => {
         const queryParams: Record<string, string | number> = {};
         if (args.page) queryParams.page = args.page;
-        return client.get(`/warehouses/${args.warehouseId}/stock`, queryParams);
+        if (args.limit) queryParams.limit = Math.min(args.limit, 500);
+        const stock = (await client.get(
+          `/warehouses/${args.warehouseId}/stock`,
+          queryParams
+        )) as Array<Record<string, unknown>>;
+        const limit = Math.min(args.limit ?? 50, 500);
+        const filtered = stock.map((item) => ({
+          productId: item.productId,
+          productName: item.productName,
+          sku: item.sku,
+          stock: item.stock,
+        }));
+        const items = filtered.slice(0, limit);
+
+        // Summary mode: return only count and metadata
+        if (args.summary) {
+          return {
+            count: items.length,
+            hasMore: items.length === limit && filtered.length > limit,
+          };
+        }
+
+        return {
+          items,
+          page: args.page,
+          pageSize: items.length,
+          hasMore: items.length === limit && filtered.length > limit,
+        };
       },
     },
 

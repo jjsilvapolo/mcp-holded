@@ -14,7 +14,7 @@ describe('Expenses Account Tools', () => {
 
   describe('list_expenses_accounts', () => {
     it('should list all expenses accounts', async () => {
-      await tools.list_expenses_accounts.handler();
+      await tools.list_expenses_accounts.handler({});
       expect(client.get).toHaveBeenCalledWith('/expensesaccounts');
     });
   });

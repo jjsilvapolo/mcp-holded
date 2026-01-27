@@ -14,7 +14,7 @@ describe('Remittance Tools', () => {
 
   describe('list_remittances', () => {
     it('should list all remittances', async () => {
-      await tools.list_remittances.handler();
+      await tools.list_remittances.handler({});
       expect(client.get).toHaveBeenCalledWith('/remittances');
     });
   });

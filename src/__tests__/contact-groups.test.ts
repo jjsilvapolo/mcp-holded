@@ -14,7 +14,7 @@ describe('Contact Group Tools', () => {
 
   describe('list_contact_groups', () => {
     it('should list all contact groups', async () => {
-      await tools.list_contact_groups.handler();
+      await tools.list_contact_groups.handler({});
       expect(client.get).toHaveBeenCalledWith('/contactgroups');
     });
   });

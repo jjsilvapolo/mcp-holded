@@ -14,7 +14,7 @@ describe('Sales Channel Tools', () => {
 
   describe('list_sales_channels', () => {
     it('should list all sales channels', async () => {
-      await tools.list_sales_channels.handler();
+      await tools.list_sales_channels.handler({});
       expect(client.get).toHaveBeenCalledWith('/saleschannels');
     });
   });
