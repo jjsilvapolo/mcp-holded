@@ -148,7 +148,8 @@ export class HoldedClient {
             key: this.apiKey,
             ...formData.getHeaders(),
           },
-          body: formData as unknown as BodyInit,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          body: formData as any, // FormData from form-data package is not compatible with native BodyInit type
         });
 
         // Check if response should be retried
