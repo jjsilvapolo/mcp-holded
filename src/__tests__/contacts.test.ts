@@ -18,9 +18,64 @@ describe('Contact Tools', () => {
       expect(client.get).toHaveBeenCalledWith('/contacts', {});
     });
 
-    it('should support pagination', async () => {
+    it('should support pagination with page parameter', async () => {
       await tools.list_contacts.handler({ page: 3 });
       expect(client.get).toHaveBeenCalledWith('/contacts', { page: 3 });
+    });
+
+    it('should handle requests without any parameters', async () => {
+      await tools.list_contacts.handler({});
+      expect(client.get).toHaveBeenCalledWith('/contacts', {});
+    });
+
+    it('should support limit parameter for virtual pagination', async () => {
+      await tools.list_contacts.handler({ limit: 10 });
+      expect(client.get).toHaveBeenCalledWith('/contacts', { limit: 10 });
+    });
+
+    it('should support summary mode', async () => {
+      await tools.list_contacts.handler({ summary: true });
+      expect(client.get).toHaveBeenCalledWith('/contacts', {});
+    });
+
+    it('should support filtering by phone', async () => {
+      await tools.list_contacts.handler({ phone: '+34600000000' });
+      expect(client.get).toHaveBeenCalledWith('/contacts', { phone: '+34600000000' });
+    });
+
+    it('should support filtering by mobile', async () => {
+      await tools.list_contacts.handler({ mobile: '+34700000000' });
+      expect(client.get).toHaveBeenCalledWith('/contacts', { mobile: '+34700000000' });
+    });
+
+    it('should support filtering by customId array', async () => {
+      await tools.list_contacts.handler({ customId: ['CUST-001', 'CUST-002'] });
+      expect(client.get).toHaveBeenCalledWith('/contacts', { 'customId[]': 'CUST-001,CUST-002' });
+    });
+
+    it('should support combining pagination and filters', async () => {
+      await tools.list_contacts.handler({
+        page: 2,
+        phone: '+34600000000',
+      });
+      expect(client.get).toHaveBeenCalledWith('/contacts', {
+        page: 2,
+        phone: '+34600000000',
+      });
+    });
+
+    it('should support combining all parameters', async () => {
+      await tools.list_contacts.handler({
+        page: 1,
+        limit: 25,
+        summary: true,
+        mobile: '+34700000000',
+      });
+      expect(client.get).toHaveBeenCalledWith('/contacts', {
+        page: 1,
+        limit: 25,
+        mobile: '+34700000000',
+      });
     });
   });
 

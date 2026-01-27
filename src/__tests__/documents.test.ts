@@ -18,14 +18,63 @@ describe('Document Tools', () => {
       expect(client.get).toHaveBeenCalledWith('/documents/invoice', {});
     });
 
-    it('should support pagination', async () => {
+    it('should support pagination with page parameter', async () => {
       await tools.list_documents.handler({ docType: 'invoice', page: 2 });
       expect(client.get).toHaveBeenCalledWith('/documents/invoice', { page: 2 });
+    });
+
+    it('should handle requests with only docType', async () => {
+      await tools.list_documents.handler({ docType: 'invoice' });
+      expect(client.get).toHaveBeenCalledWith('/documents/invoice', {});
+    });
+
+    it('should support limit parameter for virtual pagination', async () => {
+      await tools.list_documents.handler({ docType: 'invoice', limit: 20 });
+      expect(client.get).toHaveBeenCalledWith('/documents/invoice', { limit: 20 });
+    });
+
+    it('should support summary mode', async () => {
+      await tools.list_documents.handler({ docType: 'invoice', summary: true });
+      expect(client.get).toHaveBeenCalledWith('/documents/invoice', {});
     });
 
     it('should work with different document types', async () => {
       await tools.list_documents.handler({ docType: 'estimate' });
       expect(client.get).toHaveBeenCalledWith('/documents/estimate', {});
+    });
+
+    it('should support combining pagination parameters', async () => {
+      await tools.list_documents.handler({
+        docType: 'salesorder',
+        page: 3,
+      });
+      expect(client.get).toHaveBeenCalledWith('/documents/salesorder', { page: 3 });
+    });
+
+    it('should support summary mode with pagination', async () => {
+      await tools.list_documents.handler({
+        docType: 'invoice',
+        page: 1,
+        summary: true,
+      });
+      expect(client.get).toHaveBeenCalledWith('/documents/invoice', { page: 1 });
+    });
+
+    it('should handle all document types correctly', async () => {
+      const docTypes = ['invoice', 'estimate', 'salesorder', 'purchaseorder', 'waybill'];
+      for (const docType of docTypes) {
+        await tools.list_documents.handler({ docType: docType as any });
+        expect(client.get).toHaveBeenCalledWith(`/documents/${docType}`, {});
+      }
+    });
+
+    it('should support limit without pagination for virtual pagination', async () => {
+      await tools.list_documents.handler({
+        docType: 'invoice',
+        limit: 5,
+        summary: false,
+      });
+      expect(client.get).toHaveBeenCalledWith('/documents/invoice', { limit: 5 });
     });
   });
 
