@@ -210,16 +210,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 // Start server
 async function main() {
   const port = parseInt(process.env.PORT || '3000');
-  const app = (await import('express')).default();
-  const { SSEServerTransport } = await import('@modelcontextprotocol/sdk/server/sse.js');
+  const { default: express } = await import('express');
+  const app = express();
+  app.use(express.json());
 
-  app.get('/sse', async (req: any, res: any) => {
-    const transport = new SSEServerTransport('/messages', res);
+  const { StreamableHTTPServerTransport } = await import('@modelcontextprotocol/sdk/server/streamableHttp.js');
+
+  app.post('/mcp', async (req: any, res: any) => {
+    const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
     await server.connect(transport);
-  });
-
-  app.post('/messages', async (req: any, res: any) => {
-    res.sendStatus(200);
+    await transport.handleRequest(req, res, req.body);
   });
 
   app.listen(port, () => {
