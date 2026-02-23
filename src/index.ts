@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 
 import { RateLimiter } from './utils/rate-limiter.js';
@@ -209,9 +209,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
 // Start server
 async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error('Holded MCP Server running on stdio');
+  const port = parseInt(process.env.PORT || '3000');
+  const app = (await import('express')).default();
+  const { SSEServerTransport } = await import('@modelcontextprotocol/sdk/server/sse.js');
+
+  app.get('/sse', async (req: any, res: any) => {
+    const transport = new SSEServerTransport('/messages', res);
+    await server.connect(transport);
+  });
+
+  app.post('/messages', async (req: any, res: any) => {
+    res.sendStatus(200);
+  });
+
+  app.listen(port, () => {
+    console.error(`Holded MCP Server running on HTTP port ${port}`);
+  });
 }
 
 main().catch((error) => {
